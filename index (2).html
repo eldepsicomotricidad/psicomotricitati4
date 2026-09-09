@@ -3,662 +3,886 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seguiment · Psicomotricitat I5</title>
+<title>Quadern de seguiment · Psicomotricitat I4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #FFFFFF;
-    --ink: #1E3A5F;        /* blau fosc - títols i text principal */
-    --ink-soft: #6B7280;   /* gris - text secundari */
-    --blue: #1E3A5F;       /* blau - accent principal / consciència corporal */
-    --blue-bg: #E8ECF1;
-    --green: #4A7A3E;      /* verd - accent / habilitats motrius bàsiques */
-    --green-bg: #E7EFE4;
-    --teal: #3E7C8C;       /* blau-verd - joc teatralitzat */
-    --teal-bg: #E4EDEF;
-    --line: #E3E7EB;
-    --card: #F6F8FA;
+    --navy:#1E3A5F;
+    --green:#4A7A3E;
+    --teal:#3E7C8C;
+    --special:#7C8798;
+    --bg:#FFFFFF;
+    --ink:#1C2530;
+    --ink-soft:#5B6472;
+    --line:#E4E8ED;
+    --panel:#F6F8FA;
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    background: var(--bg);
+    background:var(--bg);
     color:var(--ink);
-    padding: 32px 20px 80px;
-    min-height:100vh;
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    padding-bottom:60px;
   }
-  .wrap{ max-width: 760px; margin: 0 auto; }
-
-  header{ margin-bottom: 28px; }
-  .eyebrow{
-    font-family: 'Inter', Arial, sans-serif;
-    font-size: 12.5px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin: 0 0 6px;
-    font-weight: 600;
+  h1,h2,h3,h4{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0;
   }
-  h1{
-    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 29px;
-    line-height: 1.2;
-    margin: 0 0 6px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--blue);
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:20px 16px 0;
   }
-  .sub{ font-family:'Inter', Arial, sans-serif; font-size:14.5px; color:var(--ink-soft); }
-
-  .now-card{
-    background: var(--blue);
-    color: #FFFFFF;
-    border-radius: 18px;
-    padding: 26px 26px 22px;
-    margin: 26px 0 18px;
-    position: relative;
-    box-shadow: 0 12px 28px -14px rgba(30,58,95,0.5);
+  header.top{
+    padding:24px 0 8px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:20px;
   }
-  .now-card .tag{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #A9D18C;
-    margin-bottom: 10px;
+  header.top h1{font-size:1.4rem;}
+  header.top p{margin:6px 0 0;color:var(--ink-soft);font-size:0.92rem;}
+ 
+  /* Cards */
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:18px;
   }
-  .now-card h2{
-    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
-    margin: 0 0 6px;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.25;
+  .card h2{font-size:1.05rem;margin-bottom:10px;}
+ 
+  /* This week card */
+  .thisweek{
+    border:2px solid var(--navy);
+    background:linear-gradient(180deg,#F2F6FA,#FFFFFF);
   }
-  .now-card .meta{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 13.5px;
-    color: #D7E2EC;
-    display:flex; gap: 14px; flex-wrap: wrap; margin-top: 10px;
+  .thisweek .eyebrow{
+    color:var(--teal);
+    font-size:0.78rem;
+    font-weight:600;
+    margin-bottom:4px;
   }
-  .now-card .meta span{ display:flex; align-items:center; gap:6px; }
-  .pill{
-    display:inline-block;
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 11.5px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: rgba(146,209,109,0.22);
-    color: #C7E8B4;
+  .thisweek .session-title{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:1.25rem;
+    color:var(--navy);
+    margin:4px 0 6px;
   }
-  .empty-msg{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 14px;
-    color:#D7E2EC;
-  }
-
-  .controls{
-    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 13.5px;
-    margin: 18px 0 10px;
-  }
-  .controls label{ color: var(--ink-soft); }
-  input[type="date"]{
-    font-family: inherit;
-    font-size: 13.5px;
-    padding: 6px 8px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--card);
-    color: var(--ink);
-  }
-
-  .skip-box{
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 16px 18px;
-    margin: 18px 0 28px;
-    font-family:'Inter', Arial, sans-serif;
-  }
-  .skip-box h3{
-    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    margin: 0 0 10px;
-    font-weight: 600;
-    color: var(--blue);
-  }
-  .skip-form{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom: 10px; }
-  .skip-form select, .skip-form input[type=text]{
-    font-family: inherit; font-size: 13px;
-    padding: 7px 9px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: #fff;
-  }
-  .skip-form input[type=text]{ flex:1; min-width: 140px; }
-  button{
-    font-family: 'Inter', inherit;
-    font-weight: 600;
-    cursor:pointer;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
-    background: var(--blue);
-    color: #fff;
-    transition: background .15s;
-  }
-  button:hover{ background: #16294A; }
-  button.ghost{
-    background: transparent;
-    color: var(--ink-soft);
-    border: 1px solid var(--line);
-    font-weight: 500;
-  }
-  button.ghost:hover{ background: #00000008; color: var(--ink); }
-  .skip-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;}
-  .skip-list li{
-    display:flex; justify-content:space-between; align-items:center;
-    font-size: 13px; color: var(--ink-soft);
-    background: #fff; border:1px solid var(--line); border-radius: 8px;
-    padding: 6px 10px;
-  }
-  .skip-list button{ padding: 3px 9px; font-size:11.5px; background:#00000010; color:var(--ink-soft); font-weight:500; }
-  .skip-list button:hover{ background:#00000018; }
-
-  .trimester{ margin-top: 30px; }
-  .trimester-title{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--ink-soft);
-    margin: 0 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid var(--line);
-  }
-  .session-item{ border-bottom: 1px solid var(--line); }
-  .session-item:last-child{ border-bottom:none; }
-  .session-row{
-    display:grid;
-    grid-template-columns: 34px 1fr auto auto;
-    gap: 14px;
+  .thisweek .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
     align-items:center;
-    padding: 11px 6px;
-    cursor: pointer;
+    margin-top:8px;
   }
-  .session-row:hover{ background: #F6F8FA; }
-  .session-item.done .session-row{ opacity: 0.42; }
-  .session-item.current .session-row{
-    background: var(--green-bg);
-    border-radius: 10px;
-    margin: 0 -6px;
-    padding: 11px 12px;
+  .thisweek .status-msg{
+    font-size:0.95rem;
+    color:var(--ink-soft);
+  }
+  .badge{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:20px;
+    font-size:0.75rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .badge.hmb{background:var(--teal);}
+  .badge.teatre{background:var(--green);}
+  .badge.cos{background:var(--navy);}
+  .badge.esp{background:var(--special);}
+ 
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .dot.hmb{background:var(--teal);}
+  .dot.teatre{background:var(--green);}
+  .dot.cos{background:var(--navy);}
+  .dot.esp{background:var(--special);}
+ 
+  /* Config card */
+  label{font-size:0.85rem;font-weight:600;color:var(--navy);display:block;margin-bottom:4px;}
+  input[type=date], input[type=text]{
+    width:100%;
+    padding:9px 10px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    font-family:'Inter',sans-serif;
+    font-size:0.9rem;
+    background:#fff;
+    color:var(--ink);
+  }
+  .field{margin-bottom:12px;}
+  .row2{display:flex;gap:10px;flex-wrap:wrap;}
+  .row2 > div{flex:1;min-width:140px;}
+  button{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:0.85rem;
+    border:none;
+    border-radius:8px;
+    padding:9px 14px;
+    cursor:pointer;
+    background:var(--navy);
+    color:#fff;
+  }
+  button.secondary{
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+  }
+  button:hover{opacity:0.9;}
+ 
+  .skip-list{margin-top:12px;}
+  .skip-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 10px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:6px;
+    font-size:0.85rem;
+  }
+  .skip-item .txt{color:var(--ink);}
+  .skip-item .txt small{display:block;color:var(--ink-soft);}
+  .skip-item button{
+    background:transparent;
+    color:#B0432E;
+    padding:2px 8px;
+    font-size:1rem;
+  }
+  .empty-note{color:var(--ink-soft);font-size:0.85rem;font-style:italic;}
+ 
+  /* Trimester groups */
+  .trimestre-title{
+    font-size:1.05rem;
+    margin:26px 0 10px;
+    padding-bottom:6px;
+    border-bottom:2px solid var(--line);
+  }
+ 
+  .session-item{
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin-bottom:10px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .session-item.passed{opacity:0.5;}
+  .session-item.current{
+    border:2px solid var(--navy);
+    box-shadow:0 2px 10px rgba(30,58,95,0.12);
+  }
+  .session-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 14px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .session-num{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    min-width:26px;
+  }
+  .session-head .titles{flex:1;min-width:0;}
+  .session-head .titles h3{
+    font-size:0.98rem;
+    font-weight:600;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .session-head .date{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-top:2px;
   }
   .chevron{
-    color: var(--ink-soft);
-    font-size: 12px;
-    transition: transform .15s;
-    width: 14px; text-align:center;
+    transition:transform 0.2s ease;
+    color:var(--ink-soft);
+    flex-shrink:0;
   }
-  .session-item.expanded .chevron{ transform: rotate(90deg); color: var(--blue); }
-  .session-detail{
+  .session-item.open .chevron{transform:rotate(90deg);}
+ 
+  .session-body{
     display:none;
-    padding: 4px 6px 20px 44px;
-    font-family: 'Inter', Arial, sans-serif;
+    padding:0 14px 16px;
+    border-top:1px solid var(--line);
   }
-  .session-item.expanded .session-detail{ display:block; }
+  .session-item.open .session-body{display:block;}
+ 
   .obj-line{
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    margin: 0 0 14px;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    margin:10px 0 12px;
   }
+ 
   .block{
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--line);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
+    background:var(--panel);
+    border-radius:10px;
+    padding:12px 14px;
+    margin-top:10px;
   }
-  .block-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-bottom: 6px;
+  .block h4{
+    font-size:0.85rem;
+    color:var(--navy);
+    margin-bottom:6px;
   }
-  .block-head .name{
-    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
-    font-weight:600; font-size: 14px; color: var(--ink);
+  .block p{margin:0 0 8px;font-size:0.88rem;}
+  .block .submeta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:0.78rem;
+    color:var(--ink-soft);
   }
-  .block-head .dur{ font-size: 11.5px; color: var(--ink-soft); white-space:nowrap; font-weight:500; }
-  .block p{ font-size: 13px; line-height:1.55; color: #3B4859; margin: 0 0 8px; }
-  .block .tags{ display:flex; gap:16px; flex-wrap:wrap; font-size:11.5px; color: var(--ink-soft); }
-  .block .tags b{ color: var(--ink); font-weight:600; }
-  .num{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-soft);
-    text-align:center;
+  .block .submeta b{color:var(--ink);}
+ 
+  .breath-chip{
+    margin-top:10px;
+    background:#EAF1F4;
+    border:1px solid #CFE0E6;
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:0.83rem;
   }
-  .title-cell .title{ font-family:'Poppins','Helvetica Neue',Arial,sans-serif; font-weight:500; font-size: 15px; line-height:1.3; color: var(--ink); }
-  .title-cell .type{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    margin-top: 4px;
-    display:inline-block;
-    padding: 2px 9px;
-    border-radius: 999px;
+  .breath-chip .name{
+    font-weight:600;
+    color:var(--teal);
+    display:block;
+    margin-bottom:3px;
   }
-  .type.HMB{ background: var(--green-bg); color: var(--green); }
-  .type.CC{ background: var(--blue-bg); color: var(--blue); }
-  .type.JT{ background: var(--teal-bg); color: var(--teal); }
-  .block[data-type="HMB"]{ border-left-color: var(--green); }
-  .block[data-type="CC"]{ border-left-color: var(--blue); }
-  .block[data-type="JT"]{ border-left-color: var(--teal); }
-  .date-cell{
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 13px;
-    color: var(--ink-soft);
-    text-align: right;
-    white-space: nowrap;
+ 
+  .special-note{
+    font-size:0.9rem;
+    margin-top:10px;
+    background:var(--panel);
+    border-radius:10px;
+    padding:12px 14px;
   }
-
+  .special-note b{display:block;color:var(--navy);margin-bottom:4px;font-size:0.82rem;}
+ 
   footer{
-    margin-top: 40px;
-    font-family:'Inter', Arial, sans-serif;
-    font-size: 12px;
-    color: var(--ink-soft);
+    max-width:760px;
+    margin:30px auto 0;
+    padding:0 16px;
+    color:var(--ink-soft);
+    font-size:0.78rem;
     text-align:center;
   }
-  #status{ font-size:12px; color:var(--ink-soft); font-family:'Inter', Arial, sans-serif; margin-top:6px;}
+ 
+  @media (max-width:480px){
+    .thisweek .session-title{font-size:1.1rem;}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <p class="eyebrow">Educació Infantil · I5 · Curs 2025–2026</p>
-    <h1>Seguiment setmanal de Psicomotricitat</h1>
-    <p class="sub">27 sessions, una per setmana, amb marge per saltar-ne quan calgui.</p>
+ 
+  <header class="top">
+    <h1>Quadern de seguiment setmanal</h1>
+    <p>Psicomotricitat · I4 · Curs 2026–2027 · Escola Pia Sitges</p>
   </header>
-
-  <div id="nowCard" class="now-card">
-    <p class="tag">CARREGANT…</p>
-  </div>
-
-  <div class="controls">
-    <label for="startDate">Data de la Sessió 1</label>
-    <input type="date" id="startDate">
-    <span id="status"></span>
-  </div>
-
-  <div class="skip-box">
-    <h3>Setmanes saltades</h3>
-    <div class="skip-form">
-      <select id="skipSession"></select>
-      <input type="text" id="skipReason" placeholder="Motiu (festa, sortida…) — opcional">
-      <button id="addSkip">Saltar una setmana des d'aquí</button>
+ 
+  <!-- AQUESTA SETMANA -->
+  <div class="card thisweek" id="thisWeekCard"></div>
+ 
+  <!-- CONFIGURACIÓ -->
+  <div class="card">
+    <h2>Configuració del calendari</h2>
+    <div class="field">
+      <label for="startDate">Data d'inici de la Sessió 1</label>
+      <input type="date" id="startDate">
     </div>
-    <ul class="skip-list" id="skipList"></ul>
+ 
+    <div class="field">
+      <label>Setmanes saltades (festius, sortides...)</label>
+      <div class="row2">
+        <div>
+          <input type="date" id="skipDate">
+        </div>
+        <div>
+          <input type="text" id="skipReason" placeholder="Motiu (opcional)">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <button id="addSkipBtn" type="button">Afegir setmana saltada</button>
+      </div>
+      <div class="skip-list" id="skipList"></div>
+    </div>
   </div>
-
-  <div id="sessions"></div>
-
-  <footer>Els canvis es desen automàticament en aquest navegador. Si l'obres des d'un altre dispositiu, caldrà tornar a configurar la data i les setmanes saltades.</footer>
+ 
+  <div class="card">
+    <h2>Llegenda de tipologies</h2>
+    <div class="legend">
+      <span><i class="dot hmb"></i>Habilitats motrius bàsiques</span>
+      <span><i class="dot teatre"></i>Joc teatralitzat</span>
+      <span><i class="dot cos"></i>Consciència corporal</span>
+      <span><i class="dot esp"></i>Sessió especial</span>
+    </div>
+  </div>
+ 
+  <div id="sessionsContainer"></div>
+ 
 </div>
-
+ 
+<footer>Programació d'aula · Psicomotricitat I4 · Escola Pia Sitges · Setembre 2026</footer>
+ 
 <script>
-const NIVELL_JOC = {
-  1: "El protagonista del dia tria un joc d'entre el repertori de jocs reglats de nivell 1, ja coneguts (pica-paret, vampirs, taurons i pingüins, gelats).",
-  2: "El protagonista del dia tria un joc d'entre el repertori de jocs reglats de nivell 2, amb normes una mica més complexes (el mocador, gel i foc, seguir el líder, variants del pica-paret).",
-  3: "El protagonista del dia tria un joc d'entre el repertori de jocs reglats de nivell 3, amb rols diferenciats i estratègia senzilla (l'aranya peluda, xarranca ràpida, lladres i policies simplificat)."
+/* =========================================================
+   BANC DE RESPIRACIÓ / IOGA
+========================================================= */
+const bancRespiracio = {
+  "Globus que s'infla": "Inspirem inflant la panxa com un globus, aguantem un instant i deixem anar l'aire lentament fent 'ffff'.",
+  "Elefant": "Inspirem aixecant els braços entrellaçats com una trompa i expirem baixant-los lentament.",
+  "Serp que xiula": "Inspirem pel nas i expirem llarg fent 'ssss', movent el cos com una serp.",
+  "Abella": "Expirem fent 'mmm' amb la boca tancada, notant la vibració.",
+  "Postura de l'arbre": "Dempeus, un peu recolzat a l'altra cama, braços amunt: equilibri i concentració.",
+  "Gat-vaca": "A quatre grapes, arquegem i corbem l'esquena seguint la respiració.",
+  "Papallona": "Asseguts, plantes dels peus juntes, obrim i tanquem les 'ales' (cames) amb calma.",
+  "Gos cap avall": "Formem una 'muntanya' amb el cos, mans i peus a terra, respirant profund."
 };
-const RESPIRACIO = {
-  1: "Fem una respiració guiada breu tipus «bombolla»: inspirem profund pel nas i expirem lentament per la boca, com si buféssim una bombolla gegant (2-3 repeticions).",
-  2: "Fem una respiració guiada associada a un animal relacionat amb la sessió (per exemple, «respiració de la papallona» o «respiració del gat»), inspirant i expirant de manera pausada.",
-  3: "Fem una respiració guiada més llarga, incorporant una petita visualització (imaginar un lloc tranquil) abans de la cloenda de la sessió."
-};
-const JUGUEM_JUNTS_INTRO = "Arribem a l'aula de psicomotricitat, fem rotllana i expliquem breument com es desenvoluparà la sessió (recordem les 4 parts: juguem junts, joc dirigit, joc lliure i relaxació). Ens traiem les sabates amb calma: aquest és el moment d'arribar tranquils. ";
-const JUGUEM_JUNTS_OUTRO = " En acabar el joc, la mestra apaga el llum, senyal que és moment de tornar a la rotllana per donar pas a la segona part.";
-const JOC_LLIURE_DEFAULT = "A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material. Poden seguir jugant de la manera proposada inicialment, però també usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal que és moment de tornar a la rotllana per donar pas a la darrera part de la sessió.";
-const RETROACCIO_INTRO = "Un cop a la nova rotllana, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions de la sessió. ";
-
-const SESSIONS = [
-{n:1, title:"Ens coneixem i coneixem l'espai", type:"CC", tri:1, obj:"2.1, 2.2, 3.2, 4.1",
-  jd:{desc:"Fem un recorregut guiat pels espais de l'aula de psico i el seu ús (on deixem les sabates, l'aigua, la roba). En parelles, resseguim la silueta d'un company o companya: un grup ho fa a la pista amb guixos i l'altre a la sorra amb pals. Un cop dibuixada, hi afegim totes les parts del cos que hi veiem (ulls, dits, boca, roba…), verbalitzant-les en veu alta.", org:"Pati · Parelles", mat:"Guixos, pals"},
-  jl:{mat:"Blocs de construcció, blocs d'escuma", extra:"Es manté el mateix material a disposició, ampliat amb blocs de construcció i d'escuma."},
-  retro:{closing:"Per acabar, fem un dibuix a la fulla DIN A3 d'una part del cos que ens agradi especialment.", org:"Individual", mat:"Full DIN A3, llapis"}},
-{n:2, title:"Circuit de la tardor", type:"HMB", tri:1, obj:"1.1, 1.2, 1.3",
-  jd:{desc:"En grups cooperatius, cada equip crea una part d'un circuit ambientat en la tardor (els tubs són caus, els mocadors són fulles, els cons són castanyes), treballant una HMB diferent a cada tram (saltar, gatejar, esquivar, fer equilibris). Un cop muntat tot el circuit, hi passem individualment i, després, en parelles.", org:"Grups cooperatius · Individual", mat:"Tubs, mocadors, blocs d'escuma, cons"},
-  jl:{mat:"Material usat pel circuit", extra:"Es manté muntat el circuit perquè el puguin reinventar lliurement."},
-  retro:{closing:"Per acabar, repartim un full DIN A3 perquè puguin dibuixar la sessió d'avui.", org:"Individual", mat:"Full DIN A3, llapis"}},
-{n:3, title:"El conte de la Castanyera", type:"JT", tri:1, obj:"4.2, 2.5, 4.4",
-  jd:{desc:"A partir del conte de la Castanyera, la mestra el narra i va escollint qui representarà cada personatge. Els infants es guarneixen amb mocadors i piques i posen veu i moviment als personatges de la història, seguint el fil narratiu.", org:"Gran grup", mat:"Blocs d'escuma, mocadors, piques"},
-  jl:{mat:"Blocs d'escuma, mocadors, piques"},
-  retro:{closing:"Per acabar, posem música i fem un massatge en parelles amb les pilotes.", org:"Parelles", mat:"Altaveu i música, pilotes"}},
-{n:4, title:"Joan Petit: descobrim el cos i la lateralitat", type:"CC", tri:1, obj:"1.5, 2.1, 5.2",
-  jd:{desc:"Ballem «En Joan Petit quan balla» anomenant i movent cada part del cos indicada, incorporant progressivament la consigna «amb la mà dreta / amb la mà esquerra». Després, en parelles, amb fustes, resseguim la silueta del company: qui està estirat s'aixeca i, entre tots dos, la vesteixen, procurant col·locar cada peça al costat correcte (dret/esquerre).", org:"Parelles", mat:"Altaveu i música, fustes i mocadors"},
-  jl:{mat:"Fustes, mocadors"},
-  retro:{closing:"Per acabar, fem un massatge en parelles (pizza).", org:"Parelles", mat:"—"}},
-{n:5, title:"Equilibris i saltirons", type:"HMB", tri:1, obj:"1.1, 1.3",
-  jd:{desc:"Circuit fix amb quatre estacions d'equilibri i salt: corda al terra (passar-hi per sobre sense caure), banc (desplaçar-s'hi mantenint l'equilibri), saquets (transportar-los d'un lloc a l'altre sense que caiguin) i coixins (saltar d'un a l'altre). Rotació per petits grups cada 8-10 minuts.", org:"Equip cooperatiu", mat:"Cordes, banc, saquets, coixins"},
-  jl:{mat:"Cordes, banc, saquets, coixins"},
-  retro:{closing:"Per acabar, fem cloenda amb plastilina, representant com ens hem sentit.", org:"Individual", mat:"Plastilina"}},
-{n:6, title:"St. Josep de Calassanç: naixement de l'Escola Pia", type:"JT", tri:1, obj:"4.1, 4.2, 2.5",
-  jd:{desc:"Partint de la història de St. Josep de Calassanç, fem la dramatització. Es van escollint els personatges que la representaran i, entre tots, construïm una escola i representem la creació de l'Escola Pia.", org:"Gran grup", mat:"Blocs de construcció, disfresses i mocadors, piques"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb música.", org:"Gran grup", mat:"Altaveu i música"}},
-{n:7, title:"Mans que dibuixen: psicomotricitat fina", type:"CC", tri:1, obj:"5.1, 5.2",
-  jd:{desc:"Racons rotatius de psicomotricitat fina, en petits grups: 1) pinces d'estendre i boletes de cotó; 2) enfilat de macarrons amb fil; 3) laberints dibuixats a terra a mida gran per recórrer amb el dit i després amb el peu; 4) pintura amb el dit sobre una safata de sorra, fent traços (línies, cercles, ones) mentre verbalitzem «de dalt a baix», «d'esquerra a dreta». Rotació d'uns 8-10 minuts per racó.", org:"Petits grups (racons)", mat:"Pinces d'estendre, cotó, macarrons i fil, safates de sorra"},
-  jl:{mat:"Material dels racons"},
-  retro:{closing:"Per acabar, repartim un full DIN A3 perquè dibuixin un laberint o camí propi.", org:"Individual", mat:"Full DIN A3, llapis"}},
-{n:8, title:"Taller de llançaments", type:"HMB", tri:1, obj:"1.1, 1.3",
-  jd:{desc:"Fem llançaments basats en el Taller 10 d'Innovamat, prèviament parlat amb els tutors per reforçar els conceptes numèrics que s'estiguin treballant a l'aula aquell moment.", org:"Grups cooperatius", mat:"Cercles i cons"},
-  jl:{mat:"Cercles i cons"},
-  retro:{closing:"Per acabar, fem cloenda dibuixant allò que marca la làmina del Taller 10.", org:"Individual", mat:"Làmina T.10, llapis"}},
-{n:9, title:"El conte de Nadal, representem-lo", type:"JT", tri:1, obj:"4.2, 4.4, 2.5",
-  jd:{desc:"Es narra un conte nadalenc senzill (per exemple, el viatge d'un personatge que porta llum a un poble fosc) i s'hi van incorporant gestos i moviments col·lectius que la mestra proposa i els infants repeteixen i amplien.", org:"Gran grup", mat:"Altaveu i música, mocadors, disfresses"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, cantem i ballem una cançó nadalenca en rotllana.", org:"Gran grup", mat:"Altaveu i música"}},
-{n:10, title:"Circuit d'hivern", type:"HMB", tri:2, obj:"1.1, 1.2, 1.3",
-  jd:{desc:"Circuit cooperatiu per grups: cada equip crea i explica una estació ambientada en l'hivern (mantes = neu per arrossegar-s'hi, cercles = glaçons per saltar-hi d'un a l'altre, blocs d'escuma = pedres per esquivar), treballant-hi una HMB diferent. Rotació completa pel circuit.", org:"Grups cooperatius", mat:"Mantes, cercles, blocs d'escuma"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb plastilina.", org:"Individual", mat:"Plastilina"}},
-{n:11, title:"Miralls: em moc com tu", type:"CC", tri:2, obj:"2.1, 4.2",
-  jd:{desc:"En parelles, juguem a imitar-nos, a fer de miralls: cadascú representa un moviment i la parella l'ha de copiar. Un cop fets uns quants moviments i intercanviat el rol, passem a disfressar-nos amb mocadors perquè la parella també hagi de copiar la disfressa.", org:"Parelles", mat:"Mocadors"},
-  jl:{mat:"Mocadors"},
-  retro:{closing:"Per acabar, fem cloenda amb música i un massatge grupal.", org:"Gran grup", mat:"Altaveu i música"}},
-{n:12, title:"Titelles de mocador: la nit de Reis", type:"JT", tri:2, obj:"4.2, 4.3",
-  jd:{desc:"Es dona un mocador a cada infant perquè creï la seva pròpia titella, fent-hi un nus i movent-la. Fem moviment amb la titella (saludar els amics, posar-la a dormir…) i, després, l'utilitzem per representar breument l'arribada dels Reis. Repetim el procés creant una segona titella amb les sabates i la dessuadora.", org:"Individual", mat:"Mocador, sabates, dessuadora"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb un massatge en parelles.", org:"Parelles", mat:"Altaveu i música, pilotes"}},
-{n:13, title:"Jocs tradicionals: bitlles i xarranca", type:"HMB", tri:2, obj:"1.1, 1.3, 6.1",
-  jd:{desc:"Presentem dos jocs tradicionals amb regles explícites i progressives: les bitlles (llançar per fer-les caure, respectant els torns per equip) i la xarranca (seqüència de salts a peu coix i a dos peus). Practiquem primer tots junts i després deixem que ho facin en petits grups seguint les normes de manera autònoma.", org:"Equip cooperatiu", mat:"Bitlles, guix"},
-  jl:{mat:"Bitlles, guix"},
-  retro:{closing:"Per acabar, fem cloenda amb un massatge (l'ou).", org:"Gran grup", mat:"—"}},
-{n:14, title:"Respirem com animals", type:"CC", tri:2, obj:"6.2, 2.1",
-  jd:{desc:"Sessió centrada en el ioga infantil: postures d'animals (gat, gos, papallona, serp) associades cadascuna a un tipus de respiració concreta (inspiració-expiració llarga i pausada), combinades amb jocs de respiració (bufar plomes imaginàries, inflar un globus imaginari, «respiració de l'abella»).", org:"Gran grup", mat:"Estoretes, música suau"},
-  jl:{mat:"Estoretes", extra:"El joc lliure d'aquesta sessió es manté tranquil, amb el mateix material de ioga a disposició."},
-  retro:{closing:"En ser una sessió de ioga, la relaxació final s'allarga una mica més de l'habitual, amb una relaxació guiada tombats a terra.", org:"Gran grup", mat:"Música suau"}},
-{n:15, title:"Carnaval: la Vella Quaresma", type:"JT", tri:2, obj:"4.2, 2.5",
-  jd:{desc:"S'explica el conte de carnaval. Seguidament, s'escull el carnestoltes, que va narrant la història i escollint els personatges. A partir d'aquí es crea una festa on també apareix la Vella Quaresma, i cadascú té un rol definit pel carnestoltes.", org:"Gran grup", mat:"Conte de carnaval, disfresses i mocadors"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda dibuixant allò que més ens ha agradat de la sessió.", org:"Individual", mat:"Full DIN A3, llapis"}},
-{n:16, title:"Jocs cooperatius: l'illa", type:"HMB", tri:2, obj:"1.3, 2.5, 4.1",
-  jd:{desc:"Presentem dos jocs en equip cooperatiu: «Les quatre cantonades» (canviar de cantonada quan la mestra ho indiqui, sense deixar-se anar de les mans) i «L'illa» (a partir d'una petita història, situar-se dins d'una illa pintada amb guix que es va reduint de mida, procurant que hi càpiguen tots).", org:"Equip cooperatiu · Gran grup", mat:"Guix"},
-  jl:{mat:"Guix"},
-  retro:{closing:"Per acabar, fem cloenda dibuixant allò que més ens ha agradat de la sessió.", org:"Individual", mat:"Full DIN A3, llapis"}},
-{n:17, title:"El cos que s'equilibra", type:"CC", tri:2, obj:"6.2, 1.1",
-  jd:{desc:"Sessió de ioga centrada en l'equilibri: postura de l'arbre, del flamenc i del guerrer, combinades amb petits reptes d'equilibri estàtic (aguantar la postura uns segons) i una respiració conscient entre postura i postura.", org:"Gran grup", mat:"Estoretes, música suau"},
-  jl:{mat:"Estoretes"},
-  retro:{closing:"Relaxació final llarga, tombats a terra, repassant en veu baixa les postures fetes durant la sessió.", org:"Gran grup", mat:"Música suau"}},
-{n:18, title:"L'espantaocells i el concurs de ioga amb en Roc", type:"JT", tri:2, obj:"4.2, 2.5",
-  jd:{desc:"Activitat vinculada a l'itinerari d'aprenentatge de l'espantaocells: comencem amb el conte, que la mestra narra mentre cadascú va representant els moviments de ioga que s'hi esmenten. Després ens disfressem d'espantaocells amb material reciclat i disfresses, i ens presentem al concurs de ioga amb en Roc.", org:"Gran grup", mat:"Materials reciclats i disfresses"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb plastilina representant allò que més ens ha agradat.", org:"Individual", mat:"Plastilina"}},
-{n:19, title:"La llegenda de Sant Jordi", type:"JT", tri:3, obj:"4.2, 2.5, 4.4",
-  jd:{desc:"Es representa la llegenda de Sant Jordi. Es divideix el grup en dos subgrups i cadascú escull quin personatge vol representar; la meitat de la classe representa la llegenda i l'altra fa de públic. Entre tots es crea el decorat del castell, la granja i la cova, i la mestra narra la història mentre els infants la van dramatitzant.", org:"Petit grup", mat:"Disfresses, blocs d'escuma, blocs de construcció"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb plastilina plasmant allò que més ens ha agradat.", org:"Gran grup", mat:"Plastilina"}},
-{n:20, title:"Circuit cooperatiu de primavera", type:"HMB", tri:3, obj:"1.1, 1.2, 1.3",
-  jd:{desc:"En equip cooperatiu, cada grup pensa un tram de circuit tenint present que cadascú hi ha de treballar una habilitat motriu bàsica. Primer s'escull en equip quina HMB es vol treballar, pactant amb la resta de grups perquè no es repeteixin.", org:"Equip cooperatiu", mat:"Depenent de l'equip"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem un dibuix de la sessió.", org:"Gran grup", mat:"Full DIN A3, llapis"}},
-{n:21, title:"La meva titella de volum: cossos geomètrics", type:"CC", tri:3, obj:"5.3, 4.2",
-  jd:{desc:"Entre tots cantem «En Joan Petit quan balla» per fer memòria de les parts del cos. Recordem els moments en què hem creat titelles i preguntem què es pot aconseguir fer amb el paper d'embalar. Els diem que les titelles tenen volum i preguntem quins cossos coneixen (esfera, prisma, cilindre…). Es dona el material a cada equip perquè creï la seva titella i, finalment, la presenten a la rotllana explicant com s'han posat d'acord, quins cossos han usat i quin nom li han decidit posar.", org:"Equip cooperatiu", mat:"Paper d'embalar, cinta adhesiva"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Compartim verbalment com ha anat el procés de creació en equip.", org:"Gran grup", mat:"—"}},
-{n:22, title:"Jocs tradicionals: bales, xapes i corda", type:"HMB", tri:3, obj:"1.1, 6.1",
-  jd:{desc:"Presentem tres jocs tradicionals de precisió i motricitat fina-gruixuda combinada: les bales (llançar i encertar), les xapes (fer-les lliscar amb el dit seguint un recorregut) i la corda (saltar-hi seguint un ritme). Expliquem les normes de cada joc i les practiquem progressivament.", org:"Equip cooperatiu", mat:"Bales, xapes, corda"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb un massatge (l'ou).", org:"Gran grup", mat:"—"}},
-{n:23, title:"Lateralitat i orientació: dreta-esquerra", type:"CC", tri:3, obj:"5.2, 1.5",
-  jd:{desc:"Juguem a «Simon diu» amb consignes de lateralitat (aixeca la mà dreta, toca't el peu esquerre amb la mà dreta…). Després, muntem un petit circuit d'orientació al terra amb fletxes de colors (un color per a la dreta, un altre per a l'esquerra) que cal seguir a partir d'instruccions verbals de la mestra.", org:"Gran grup · Individual", mat:"Fletxes de colors, guix"},
-  jl:{mat:"Fletxes de colors, guix"},
-  retro:{closing:"Per acabar, fem un dibuix indicant amb fletxes el camí que més ens ha agradat del circuit.", org:"Individual", mat:"Full DIN A3, llapis"}},
-{n:24, title:"Joc dramàtic lliure: el nostre conte", type:"JT", tri:3, obj:"4.2, 4.3, 2.5",
-  jd:{desc:"En petits grups, els infants inventen col·lectivament un conte breu (amb una estructura de suport: personatge, problema, solució) i el representen amb disfresses i material del racó, mentre la resta fa de públic per torns.", org:"Petits grups", mat:"Disfresses, mocadors"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Per acabar, fem cloenda amb música.", org:"Gran grup", mat:"Altaveu i música"}},
-{n:25, title:"Jocs reglats de pati: l'aranya peluda i variants", type:"HMB", tri:3, obj:"6.1, 6.3",
-  jd:{desc:"Es presenten i practiquen jocs reglats pensats per jugar-hi de manera autònoma al pati (l'aranya peluda, variants del pica-paret, l'1-2-3 pica paret), amb èmfasi a explicar bé les normes i el rol de cadascú perquè puguin reproduir-los sense l'ajuda de l'adult.", org:"Aula de psico / Pati · Gran grup", mat:"Cap material específic (espai delimitat)"},
-  jl:{mat:"—", custom:"El joc lliure d'aquesta sessió consisteix a seguir jugant als mateixos jocs reglats, ja de manera autònoma."},
-  retro:{closing:"Compartim quins d'aquests jocs voldrien continuar jugant al pati.", org:"Gran grup", mat:"—"}},
-{n:26, title:"Respiració i relaxació final", type:"CC", tri:3, obj:"6.2",
-  jd:{desc:"Sessió de cloenda de ioga i relaxació: repassem les postures i respiracions treballades durant el curs i, en parelles, creem una petita seqüència pròpia combinant-ne dues o tres.", org:"Parelles", mat:"Estoretes, música suau"},
-  jl:{mat:"Estoretes"},
-  retro:{closing:"Relaxació final llarga amb música i massatge per parelles.", org:"Parelles", mat:"Altaveu i música"}},
-{n:27, title:"Festa de cloenda: el musical de curs", type:"JT", tri:3, obj:"4.1, 4.2, 2.5, 4.4",
-  jd:{desc:"Sessió de tancament de curs: recuperem un fragment de cadascuna de les dramatitzacions treballades durant l'any (la Castanyera, Sant Jordi, Carnaval…) i muntem un petit «musical» col·lectiu, que es pot compartir amb una altra classe o amb les famílies si s'escau.", org:"Gran grup", mat:"Disfresses i materials de l'any, altaveu i música"},
-  jl:{mat:"Mateix material"},
-  retro:{closing:"Cloenda de curs amb música i una rotllana final de comiat.", org:"Gran grup", mat:"Altaveu i música"}},
+ 
+/* =========================================================
+   DADES DE LES 29 SESSIONS (extretes de la programació)
+========================================================= */
+const sessions = [
+{n:1, t:'esp', ti:"Coneixem l'espai de psico", tr:1, obj:"2.2, 3.2, 4.1", resp:"Globus que s'infla",
+ b:[
+  {n:"Juguem junts", d:"Arribem per primer cop a l'aula de psicomotricitat. Fem una rotllana i, per primera vegada, presentem els 3 acords d'aula (em cuido a mi mateix, respecto els altres, tinc cura del material) i expliquem que aquest serà l'espai on farem psicomotricitat tot el curs. Ens descalcem amb calma: aquest és el moment d'arribar tranquils.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Fem un recorregut guiat pels espais de l'aula de psico: on deixem les sabates, l'aigua i la roba, i on és la 'caseta' del material. Cada infant explora lliurement un racó diferent (bancs, cercles, teles) mentre la mestra hi passa i verbalitza en veu alta el que fa cadascú, per anar-los familiaritzant amb el vocabulari de l'espai.", o:"Gran grup / racons", m:"Bancs, cercles, teles, material divers de l'aula", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els mateixos racons de l'aula). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els mateixos racons de l'aula", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el globus que s'infla' (veure banc de recursos). Acabem amb una rotllana de presentació: cadascú diu el seu nom fent un gest amb el cos.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:2, t:'teatre', ti:"Colònies: construïm la nostra casa", tr:1, obj:"2.3, 2.5, 4.2", resp:"Serp que xiula",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"En grups cooperatius de 4-5 infants, amb peces de construcció diferents (lego, peces grans, blocs), pensen i acorden com serà la seva 'casa de colònies'. Un cop construïda, hi entren i hi juguen simbòlicament: qui hi dorm, qui hi cuina, qui en fa de guia. La mestra circula pels grups fent de testimoni, sense dirigir el contingut del joc.", o:"Grups cooperatius de 4-5", m:"Peces de construcció (lego, peces grans, blocs)", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (les mateixes peces de construcció). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"les mateixes peces de construcció", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la serp que xiula' (veure banc de recursos). Dibuix individual de la casa que han construït.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:3, t:'hmb', ti:"Circuit d'observació inicial", tr:1, obj:"1.1, 1.2, 1.5", resp:"Elefant",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Muntem el primer circuit del curs amb banc, cordes, espatlleres, cercles, cons i piques, dissenyat per observar 3 habilitats motrius bàsiques: salt, equilibri i desplaçament. Hi passen individualment mentre la mestra observa i pren notes per a la graella inicial; després ho repeteixen en parelles, ajudant-se als trams d'equilibri.", o:"Individual i, després, per parelles", m:"Banc, cordes, espatlleres, cercles, cons, piques", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el mateix material del circuit). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el mateix material del circuit", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'elefant' (veure banc de recursos). Plastilina lliure.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:4, t:'teatre', ti:"Conte 'Escarola Perruqueta'", tr:1, obj:"4.2, 2.5, 4.4", resp:"Abella",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"La mestra narra el conte de l'Escarola Perruqueta mentre els infants, per torns, es van guarnint amb mocadors i teles per representar cada personatge. Acompanyem la narració amb moviment i veu: com camina, com parla, com se sent cada personatge en cada moment de la història.", o:"Gran grup", m:"Conte 'Escarola Perruqueta', mocadors, teles", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els mateixos mocadors i teles). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els mateixos mocadors i teles", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'abella' (veure banc de recursos). Música i massatge per parelles.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:5, t:'cos', ti:"El nostre cos: dansa d'en Joan Petit", tr:1, obj:"1.5, 4.1", resp:"Postura de l'arbre",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Aprenem i memoritzem la cançó d'en Joan Petit movent cada part del cos que anomena la lletra, cada cop més ràpid. Un cop coneguda, la fem davant del mirall, parant atenció a quina mà, peu o costat es mou primer, per introduir la primera noció de lateralitat (el costat que 'balla primer').", o:"Gran grup, davant del mirall", m:"Mirall, equip de música", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (l'equip de música). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"l'equip de música", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la postura de l'arbre' (veure banc de recursos). Plastilina.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:6, t:'teatre', ti:"Conte de la Castanyera", tr:1, obj:"4.2, 2.5, 4.4", resp:"Gos cap avall",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Explicant el conte de la Castanyera, ens posem en el lloc dels diferents personatges: la Castanyera que camina ajudant-se d'un bastó, els infants que collen castanyes imaginàries i les couen al foc. A poc a poc som conscients dels moviments, les emocions i els diàlegs de cadascun.", o:"Gran grup", m:"Conte de la Castanyera, mocadors, cistelles", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els mateixos mocadors i cistelles). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els mateixos mocadors i cistelles", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el gos cap avall' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:7, t:'hmb', ti:"Padrins: jocs reglats", tr:1, obj:"2.4, 4.3, 4.4", resp:"La bombolla",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Dividim l'espai de psicomotricitat en diferents racons de jocs reglats tradicionals (parxís, 3 en ratlla, oca, escales, memory). Cada grup cooperatiu s'organitza amb un padrí o padrina de cursos superiors, que els ajuda a recordar i respectar les normes de cada joc abans de començar a jugar.", o:"Grups cooperatius amb padrins", m:"Jocs reglats (parxís, 3 en ratlla, oca, escales, memory)", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els mateixos jocs reglats). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els mateixos jocs reglats", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la bombolla' (veure banc de recursos). Cantem junts la cançó d'adéu.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:8, t:'cos', ti:"Figures d'acrosport", tr:1, obj:"2.5, 4.4", resp:"Papallona",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Mirem imatges d'escultures humanes (Innovamat, número 4) i n'observem la forma. En grups de 4 (cooperatiu), busquen les imatges on hi apareixen 4 infants i intenten reproduir-les amb el propi cos, ajustant equilibris i suports mutus.", o:"Grups de 4", m:"Imatges d'acrosport (Innovamat), equip de música", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (l'equip de música). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"l'equip de música", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la papallona' (veure banc de recursos). Música i massatge.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:9, t:'cos', ti:"Grafismes amb el cos", tr:1, obj:"5.1, 5.2 (relació amb Innovamat/tutors)", resp:"Elefant",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 1 (pica-paret, vampirs, taurons i pingüins, gelats). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Observem imatges reals amb grafismes repetits (ratlles, espirals, ones) i, entre tots, els identifiquem i els dibuixem amb guix al terra a mida gran. Després els resseguim caminant-hi a sobre amb els peus i, finalment, amb un dit a l'aire, treballant l'orientació espacial i la pinça digital de manera integrada.", o:"Gran grup / individual", m:"Imatges de grafismes, guixos", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els guixos i les imatges de grafismes). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els guixos i les imatges de grafismes", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'elefant' (veure banc de recursos). Plastilina.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:10, t:'teatre', ti:"Assaig funció de Nadal", tr:1, obj:"—", special:true,
+ d:"Sessió reservada per assajar la funció de Nadal: repassem entrades, sortides i moviments de cada personatge sobre l'escenari.", m:"Vestuari i atrezzo de la funció."},
+{n:11, t:'teatre', ti:"Funció de Nadal", tr:1, obj:"—", special:true,
+ d:"Sessió reservada per a la representació de la funció de Nadal davant de les famílies.", m:"Vestuari i atrezzo de la funció."},
+{n:12, t:'esp', ti:"Lliure després de vacances", tr:2, obj:"3.1, 4.1", resp:"Globus que s'infla",
+ b:[
+  {n:"Juguem junts", d:"Sessió de retrobament: fem una rotllana breu per recordar els acords i el protagonista tria un joc senzill del repertori de nivell 1, per reprendre suaument la rutina després de les vacances.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"No hi ha proposta guiada: ampliem el temps de joc lliure amb tot el material disponible a l'aula, per reconnectar amb l'espai i el grup després de les vacances de Nadal.", o:"Gran grup", m:"Equip de música i material divers", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (tot el material de l'aula). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"tot el material de l'aula", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el globus que s'infla' (veure banc de recursos). Música i massatge.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:13, t:'esp', ti:"15 de gener", tr:2, obj:"—", special:true,
+ d:"Dia festiu. No hi ha sessió de psicomotricitat.", m:"—"},
+{n:14, t:'esp', ti:"Padrins: creativitat (disfresses)", tr:2, obj:"5.1, 2.5", resp:"Serp que xiula",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Amb l'ajuda dels padrins de creativitat, acabem d'elaborar les disfresses de Carnaval: retallem, enganxem i decorem, treballant la pinça digital i la motricitat fina en un context de cooperació entre edats.", o:"Parelles amb padrins", m:"Material de manualitats per a les disfresses", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el material de manualitats sobrant). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el material de manualitats sobrant", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la serp que xiula' (veure banc de recursos). Cantem junts.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:15, t:'hmb', ti:"Circuit d'hivern", tr:2, obj:"1.1, 1.2, 1.3", resp:"Elefant",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Nou circuit, aquest cop ambientat en l'hivern (neu de cotó, 'gel' amb teles blaves): saltem entre flocs de neu, ens equilibrem sobre el gel i ens desplacem esquivant caramells. Ens centrem a observar 3 habilitats: salt, equilibri i desplaçament.", o:"Individual i per parelles", m:"Cotó, teles blaves, bancs, cons", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el material del circuit d'hivern). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el material del circuit d'hivern", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'elefant' (veure banc de recursos). Plastilina.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:16, t:'teatre', ti:"Dramatització: conte de Carnaval", tr:2, obj:"4.2, 2.5", resp:"Abella",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"A partir del conte del Carnestoltes, ens disfressem amb els elements preparats a la sessió anterior i representem la seva arribada al poble, jugant amb el contrast entre moviments desordenats i festius, i moviments tranquils quan 's'adorm' la Quaresma.", o:"Gran grup", m:"Disfresses, conte de Carnaval", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (les disfresses). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"les disfresses", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'abella' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:17, t:'teatre', ti:"Dramatització: El monstre de colors", tr:2, obj:"4.2, 4.4", resp:"Gat-vaca",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"A través del conte 'El monstre de colors', cada infant tria un mocador d'un color (que representa una emoció) i es mou, gesticula i posa veu segons l'emoció d'aquell color: ràbia (moviments forts), calma (moviments lents), alegria (salts), tristesa (moviments a poc a poc i arraulits).", o:"Gran grup", m:"Conte 'El monstre de colors', mocadors de colors", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els mocadors de colors). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els mocadors de colors", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el gat-vaca' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:18, t:'hmb', ti:"Circuit", tr:2, obj:"1.1, 1.3, 1.4", resp:"Elefant",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Nou circuit general que combina els tres eixos treballats fins ara (salt, equilibri, desplaçament) en un únic recorregut més llarg i encadenat, per veure com els infants enllacen diferents habilitats seguides.", o:"Individual", m:"Material específic de psicomotricitat", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el material del circuit). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el material del circuit", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'elefant' (veure banc de recursos). Plastilina.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:19, t:'cos', ti:"Mirall i siluetes", tr:2, obj:"5.2, 4.1", resp:"Postura de l'arbre",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Per parelles, davant del mirall, un infant proposa un moviment o postura i l'altre l'imita com si fos el seu reflex; després canvien de rol. Tot seguit, dibuixem la silueta d'un company a terra amb guix, i cadascú hi afegeix les parts del cos que hi reconeix.", o:"Parelles", m:"Mirall, guixos", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el mirall i els guixos). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el mirall i els guixos", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la postura de l'arbre' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:20, t:'cos', ti:"Ombres al pati", tr:2, obj:"5.2", resp:"Serp que xiula",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Al pati, en un dia de sol, observem les nostres pròpies ombres: com creixen, com es mouen, com es transformen si canviem de postura. Amb pals i guix les resseguim al terra i experimentem fent-les 'gegants' o 'petites' apropant-nos o allunyant-nos del focus de llum.", o:"Individual i per parelles", m:"Pals, guixos", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els pals i els guixos). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els pals i els guixos", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la serp que xiula' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:21, t:'cos', ti:"Seqüències (Innovamat)", tr:2, obj:"5.3 (coordinat amb Innovamat)", resp:"La bombolla",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 2 (aranya peluda, stop, el mocador, gats i gossos). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"A partir de les cartes de moviments d'Innovamat, reproduïm amb el cos seqüències curtes (per exemple: salt-gir-equilibri) que anem allargant. En parelles, un infant proposa una seqüència de 2-3 accions i l'altre l'ha de repetir, treballant la memòria de seqüència i l'orientació espacial.", o:"Parelles", m:"Cartes de moviments (Innovamat)", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (les cartes de moviments). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"les cartes de moviments", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la bombolla' (veure banc de recursos). Fem una làmina de la seqüència treballada.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:22, t:'cos', ti:"Siluetes amb cordes", tr:3, obj:"5.2, 5.3", resp:"Papallona",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 3 (lladres i policies simplificat, xarranca ràpida, variants de l'aranya peluda amb rols). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Amb cordes al terra, cada infant o parella forma una silueta o figura senzilla (una casa, una estrella, un animal) i la resseguim caminant-hi a sobre, primer amb els ulls oberts i després, si se senten còmodes, amb els ulls tancats guiats per un company.", o:"Individual i per parelles", m:"Cordes", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (les cordes). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"les cordes", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la papallona' (veure banc de recursos). Massatge.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:23, t:'hmb', ti:"Circuit d'equilibri", tr:3, obj:"1.1, 1.4", resp:"Elefant",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 3 (lladres i policies simplificat, xarranca ràpida, variants de l'aranya peluda amb rols). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Circuit centrat específicament en l'equilibri: banc estret, línia de cons en zig-zag, coixins inestables i el fitball per rodar-hi a sobre amb ajuda. Observem com cada infant gestiona el desequilibri i quines estratègies fa servir per recuperar-lo.", o:"Individual amb ajuda", m:"Banc, cons, coixins, fitball", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el material del circuit). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el material del circuit", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'elefant' (veure banc de recursos). Massatge amb pilota gran.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:24, t:'teatre', ti:"Joc dramàtic de Sant Jordi", tr:3, obj:"4.2, 2.5", resp:"Abella",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 3 (lladres i policies simplificat, xarranca ràpida, variants de l'aranya peluda amb rols). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"A partir de la llegenda de Sant Jordi, repartim els rols (el drac, la princesa, el cavaller, el poble) i la representem entre tots, treballant el contrast entre moviments amenaçadors (el drac) i moviments valents i decidits (el cavaller).", o:"Gran grup", m:"Disfresses, material específic de psicomotricitat", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (les disfresses). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"les disfresses", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'abella' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:25, t:'teatre', ti:"El caramel", tr:3, obj:"4.2, 4.4", resp:"Serp que xiula",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 3 (lladres i policies simplificat, xarranca ràpida, variants de l'aranya peluda amb rols). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"La mestra dirigeix una petita història ('El caramel màgic') que els infants han de seguir i escenificar sobre un gran paper d'embalar estès a terra: caminar de puntetes, saltar com una granota, arrossegar-se com una serp... Després, deixem el paper mural per al joc lliure.", o:"Gran grup", m:"Paper d'embalar", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el paper d'embalar restant). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el paper d'embalar restant", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'la serp que xiula' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:26, t:'hmb', ti:"Jocs tradicionals", tr:3, obj:"2.4, 4.3", resp:"Gat-vaca",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 3 (lladres i policies simplificat, xarranca ràpida, variants de l'aranya peluda amb rols). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Al pati es reparteixen diferents racons de jocs tradicionals (bales, bitlles, bitlles catalanes, xarranca, cordes de saltar). S'expliquen un a un abans de començar i, per equips, es va rotant per cada joc, incorporant el repertori de nivell 3 après durant l'any.", o:"Equips rotatius", m:"Bales, bitlles, xarranca, cordes", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el material dels jocs tradicionals). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el material dels jocs tradicionals", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el gat-vaca' (veure banc de recursos). Dibuix.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:27, t:'hmb', ti:"Circuit d'estiu", tr:3, obj:"1.1, 1.2, 1.3, 1.4, 1.5", resp:"Elefant",
+ b:[
+  {n:"Juguem junts", d:"Arribem a l'aula de psico, ens descalcem amb calma —el moment d'arribar tranquils— i fem rotllana per recordar els 3 acords d'aula i les 4 parts de la sessió. El protagonista del dia tria un joc d'entre el repertori de nivell 3 (lladres i policies simplificat, xarranca ràpida, variants de l'aranya peluda amb rols). En acabar, la mestra apaga el llum, senyal per tornar a la rotllana i donar pas al nucli de la sessió.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Últim circuit del curs: combina totes les habilitats motrius bàsiques treballades durant l'any (salt, gir, equilibri, desplaçament, manipulació, enfilar-se) en un únic gran recorregut, que tanca l'observació anual amb un repte que els infants ja coneixen de circuits anteriors.", o:"Individual", m:"Material específic de psicomotricitat", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (el material del circuit). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"el material del circuit", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'l'elefant' (veure banc de recursos). Massatge.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:28, t:'esp', ti:"Producte final: tarda de jocs d'arreu del món amb famílies", tr:3, obj:"2.5, 4.2, 4.4", resp:"Globus que s'infla",
+ b:[
+  {n:"Juguem junts", d:"Rebem les famílies a l'aula de psico i expliquem breument la proposta de la tarda: descobrir jocs tradicionals d'arreu del món, preparats prèviament amb els tutors.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Es preparen diferents racons amb jocs tradicionals d'arreu del món (treballats prèviament amb les famílies o tutors) i es comparteixen jugant-hi junts infants i familiars, rotant pels diferents racons.", o:"Famílies i infants", m:"Jocs d'arreu del món preparats prèviament", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (els racons de jocs del món). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"els racons de jocs del món", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el globus que s'infla' (veure banc de recursos). Rotllana final de comiat amb les famílies.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]},
+{n:29, t:'esp', ti:"Joc lliure", tr:3, obj:"4.1, 4.4", resp:"Globus que s'infla",
+ b:[
+  {n:"Juguem junts", d:"Última sessió del curs: fem una rotllana especial de cloenda i expliquem que avui la sessió serà tota de joc lliure, amb tot el material de l'aula de psico a disposició.", o:"Aula de psico · Gran grup", m:"Cap material específic", du:"15 min"},
+  {n:"Presentació de material + joc dirigit", d:"Joc lliure ampli amb tot el material de l'aula de psico, sense proposta guiada, per tancar el curs amb llibertat total d'elecció.", o:"Gran grup", m:"Equip de música, material divers", du:"40 min"},
+  {n:"Joc lliure", d:"A la nova rotllana, l'adult explica que ara poden jugar lliurement amb el material (tot el material de l'aula). Poden continuar jugant de la manera proposada inicialment o usar la imaginació per fer les seves pròpies propostes. La mestra apaga el llum, senyal per tornar a la rotllana i donar pas a la darrera part.", o:"Aula de psico · Gran grup", m:"tot el material de l'aula", du:"20 min"},
+  {n:"Retroacció i relaxació", d:"Un cop a la rotllana final, ens tornem a posar les sabates. Preguntem als infants quin ha estat el seu moment preferit i donem espai perquè expliquin les seves sensacions. Fem l'exercici de respiració 'el globus que s'infla' (veure banc de recursos). Rotllana llarga de comiat repassant els moments preferits de tot el curs.", o:"Aula de psico · Gran grup", m:"Equip de música", du:"15 min"}
+ ]}
 ];
-
-const TYPE_LABEL = {HMB:"Habilitats motrius bàsiques", CC:"Consciència corporal", JT:"Joc teatralitzat"};
-const STORAGE_KEY = "psico-i5-tracker-state";
-const DEFAULT_START = "2026-09-08";
-
-let state = { startDate: DEFAULT_START, skips: [] };
-
-function fmtDate(d){
-  return d.toLocaleDateString('ca-ES', { weekday:'long', day:'numeric', month:'long' });
+ 
+const tipolLabel = {hmb:"Habilitats motrius bàsiques", teatre:"Joc teatralitzat", cos:"Consciència corporal", esp:"Especial"};
+const trimestreLabel = {1:"1r trimestre", 2:"2n trimestre", 3:"3r trimestre"};
+ 
+/* =========================================================
+   PERSISTÈNCIA (localStorage)
+========================================================= */
+const LS_START = "psico_i4_start_date";
+const LS_SKIPS = "psico_i4_skip_weeks";
+const DEFAULT_START = "2026-09-10";
+ 
+function loadStart(){
+  return localStorage.getItem(LS_START) || DEFAULT_START;
 }
-function fmtDateShort(d){
-  return d.toLocaleDateString('ca-ES', { day:'numeric', month:'short' });
+function saveStart(v){ localStorage.setItem(LS_START, v); }
+ 
+function loadSkips(){
+  try{
+    const raw = localStorage.getItem(LS_SKIPS);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
 }
-function parseISO(s){
-  const [y,m,d] = s.split('-').map(Number);
+function saveSkips(list){ localStorage.setItem(LS_SKIPS, JSON.stringify(list)); }
+ 
+/* =========================================================
+   CÀLCUL DE CALENDARI
+========================================================= */
+function parseISO(str){
+  const [y,m,d] = str.split('-').map(Number);
   return new Date(y, m-1, d);
 }
-function addDays(d, days){
-  const nd = new Date(d);
-  nd.setDate(nd.getDate() + days);
-  return nd;
+function toISO(date){
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,'0');
+  const d = String(date.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+d;
 }
-function mondayOf(d){
-  const nd = new Date(d);
-  const day = nd.getDay(); // 0 = Sunday
-  const diff = (day === 0 ? -6 : 1 - day);
-  nd.setDate(nd.getDate() + diff);
-  nd.setHours(0,0,0,0);
-  return nd;
-}
-
-function sessionDate(n){
-  const start = parseISO(state.startDate);
-  let d = addDays(start, (n-1)*7);
-  const skipWeeks = state.skips.filter(s => s.beforeSession <= n).length;
-  d = addDays(d, skipWeeks*7);
+function addDays(date, n){
+  const d = new Date(date);
+  d.setDate(d.getDate()+n);
   return d;
 }
-
-async function loadState(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(raw){
-      const parsed = JSON.parse(raw);
-      state = { startDate: parsed.startDate || DEFAULT_START, skips: parsed.skips || [] };
+function daysBetween(d1,d2){
+  const MS = 24*60*60*1000;
+  return Math.round((strip(d2)-strip(d1))/MS);
+}
+function strip(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+ 
+function weekOffsetOfSkip(skipDateStr, startDate){
+  return Math.round(daysBetween(startDate, parseISO(skipDateStr))/7);
+}
+ 
+function buildSchedule(startDate, skips, totalSessions){
+  const schedule = [];
+  let sessionNum = 1;
+  let weekOffset = 0;
+  const skipOffsets = new Set(skips.map(s => weekOffsetOfSkip(s.date, startDate)));
+  const skipReasonByOffset = {};
+  skips.forEach(s=>{ skipReasonByOffset[weekOffsetOfSkip(s.date,startDate)] = s.reason; });
+ 
+  while(sessionNum <= totalSessions && weekOffset < 300){
+    const date = addDays(startDate, weekOffset*7);
+    if(skipOffsets.has(weekOffset)){
+      schedule.push({weekOffset, date, skipped:true, reason: skipReasonByOffset[weekOffset] || ""});
+    } else {
+      schedule.push({weekOffset, date, skipped:false, sessionNum});
+      sessionNum++;
     }
-  }catch(e){
-    // no saved state yet, keep defaults
+    weekOffset++;
   }
-  document.getElementById('startDate').value = state.startDate;
+  return schedule;
 }
-
-async function saveState(){
-  const statusEl = document.getElementById('status');
-  try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    statusEl.textContent = "Desat ✓";
-    setTimeout(()=>{ statusEl.textContent = ""; }, 1500);
-  }catch(e){
-    statusEl.textContent = "No s'ha pogut desar en aquest navegador";
-  }
+ 
+const CAT_MONTHS = ["gener","febrer","març","abril","maig","juny","juliol","agost","setembre","octubre","novembre","desembre"];
+const CAT_DAYS = ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"];
+function formatDateLong(date){
+  return CAT_DAYS[date.getDay()] + " " + date.getDate() + " de " + CAT_MONTHS[date.getMonth()] + " de " + date.getFullYear();
 }
-
+function formatDateShort(date){
+  return date.getDate() + " " + CAT_MONTHS[date.getMonth()].slice(0,3) + ". " + date.getFullYear();
+}
+ 
+/* =========================================================
+   RENDER
+========================================================= */
+let state = {
+  start: loadStart(),
+  skips: loadSkips()
+};
+ 
 function render(){
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const todayMonday = mondayOf(today);
-
-  // find this week's session, or the closest upcoming one
-  let current = null;
-  let upcoming = null;
-  for(const s of SESSIONS){
-    const d = sessionDate(s.n);
-    const wMonday = mondayOf(d);
-    if(wMonday.getTime() === todayMonday.getTime()){
-      current = {session:s, date:d};
-    }
-    if(d.getTime() >= today.getTime() && !upcoming){
-      upcoming = {session:s, date:d};
-    }
+  const startDate = strip(parseISO(state.start));
+  const today = strip(new Date());
+  const schedule = buildSchedule(startDate, state.skips, sessions.length);
+ 
+  // map sessionNum -> schedule entry
+  const byNum = {};
+  schedule.forEach(e => { if(!e.skipped) byNum[e.sessionNum] = e; });
+ 
+  let todayOffset = null;
+  if(daysBetween(startDate, today) >= 0){
+    todayOffset = Math.floor(daysBetween(startDate, today)/7);
   }
-
-  const nowCard = document.getElementById('nowCard');
-  if(current){
-    nowCard.innerHTML = `
-      <p class="tag">AQUESTA SETMANA</p>
-      <h2>Sessió ${current.session.n} · ${current.session.title}</h2>
-      <div class="meta">
-        <span class="pill">${TYPE_LABEL[current.session.type]}</span>
-        <span>${fmtDate(current.date)}</span>
-        <span>Trimestre ${current.session.tri}</span>
-      </div>`;
-  } else if(upcoming){
-    const diffDays = Math.round((mondayOf(upcoming.date) - todayMonday) / 86400000);
-    nowCard.innerHTML = `
-      <p class="tag">SENSE SESSIÓ AQUESTA SETMANA</p>
-      <h2>Propera: Sessió ${upcoming.session.n} · ${upcoming.session.title}</h2>
-      <div class="meta">
-        <span class="pill">${TYPE_LABEL[upcoming.session.type]}</span>
-        <span>${fmtDate(upcoming.date)}</span>
-        <span>d'aquí ${diffDays === 1 ? '1 setmana' : diffDays + ' dies'}</span>
-      </div>`;
-  } else {
-    nowCard.innerHTML = `
-      <p class="tag">CURS ACABAT</p>
-      <p class="empty-msg">S'han completat les 27 sessions de la programació.</p>`;
-  }
-
-  // sessions list grouped by trimester
-  const container = document.getElementById('sessions');
-  container.innerHTML = '';
-  for(let tri=1; tri<=3; tri++){
-    const block = document.createElement('div');
-    block.className = 'trimester';
-    const label = tri===1 ? 'Trimestre 1 · setembre–desembre' : tri===2 ? 'Trimestre 2 · gener–març' : 'Trimestre 3 · abril–juny';
-    block.innerHTML = `<p class="trimester-title">${label}</p>`;
-    SESSIONS.filter(s=>s.tri===tri).forEach(s=>{
-      const d = sessionDate(s.n);
-      const isPast = d.getTime() < todayMonday.getTime();
-      const isCurrent = current && current.session.n === s.n;
-      const item = document.createElement('div');
-      item.className = 'session-item' + (isPast && !isCurrent ? ' done' : '') + (isCurrent ? ' current' : '');
-
-      const jocLliureText = s.jl.custom
-        ? s.jl.custom
-        : JOC_LLIURE_DEFAULT + (s.jl.extra ? ' ' + s.jl.extra : '');
-
-      item.innerHTML = `
-        <div class="session-row">
-          <div class="num">${s.n}</div>
-          <div class="title-cell">
-            <div class="title">${s.title}</div>
-            <span class="type ${s.type}">${TYPE_LABEL[s.type]}</span>
-          </div>
-          <div class="date-cell">${fmtDateShort(d)}</div>
-          <div class="chevron">▶</div>
-        </div>
-        <div class="session-detail">
-          <p class="obj-line">Objectius treballats: ${s.obj}</p>
-
-          <div class="block" data-type="${s.type}">
-            <div class="block-head"><span class="name">1. Juguem junts</span><span class="dur">15 min</span></div>
-            <p>${JUGUEM_JUNTS_INTRO}${NIVELL_JOC[s.tri]}${JUGUEM_JUNTS_OUTRO}</p>
-            <div class="tags"><span><b>Espai:</b> Aula de psico · Gran grup</span><span><b>Material:</b> Cap material</span></div>
-          </div>
-
-          <div class="block" data-type="${s.type}">
-            <div class="block-head"><span class="name">2. Presentació + joc dirigit</span><span class="dur">40 min</span></div>
-            <p>${s.jd.desc}</p>
-            <div class="tags"><span><b>Espai:</b> ${s.jd.org}</span><span><b>Material:</b> ${s.jd.mat}</span></div>
-          </div>
-
-          <div class="block" data-type="${s.type}">
-            <div class="block-head"><span class="name">3. Joc lliure</span><span class="dur">20 min</span></div>
-            <p>${jocLliureText}</p>
-            <div class="tags"><span><b>Espai:</b> Aula de psico · Gran grup</span><span><b>Material:</b> ${s.jl.mat}</span></div>
-          </div>
-
-          <div class="block" data-type="${s.type}">
-            <div class="block-head"><span class="name">4. Retroacció i relaxació</span><span class="dur">15 min</span></div>
-            <p>${RETROACCIO_INTRO}${RESPIRACIO[s.tri]} ${s.retro.closing}</p>
-            <div class="tags"><span><b>Espai:</b> Aula de psico · ${s.retro.org}</span><span><b>Material:</b> ${s.retro.mat}</span></div>
-          </div>
-        </div>`;
-
-      item.querySelector('.session-row').addEventListener('click', ()=>{
-        item.classList.toggle('expanded');
-      });
-      block.appendChild(item);
-    });
-    container.appendChild(block);
-  }
-
-  // skip session selector
-  const sel = document.getElementById('skipSession');
-  sel.innerHTML = SESSIONS.map(s => `<option value="${s.n}">Abans de la sessió ${s.n} (${s.title})</option>`).join('');
-
-  // skip list
-  const skipList = document.getElementById('skipList');
-  if(state.skips.length === 0){
-    skipList.innerHTML = `<li style="justify-content:center; color:var(--ink-soft);">Cap setmana saltada de moment</li>`;
-  } else {
-    skipList.innerHTML = state.skips
-      .slice()
-      .sort((a,b)=>a.beforeSession-b.beforeSession)
-      .map((s, idx) => `
-        <li>
-          <span>Abans de la sessió ${s.beforeSession}${s.reason ? ' — ' + s.reason : ''}</span>
-          <button data-idx="${state.skips.indexOf(s)}" class="removeSkip">Treure</button>
-        </li>`).join('');
-    skipList.querySelectorAll('.removeSkip').forEach(btn=>{
-      btn.addEventListener('click', async (e)=>{
-        const idx = parseInt(e.target.getAttribute('data-idx'));
-        state.skips.splice(idx,1);
-        await saveState();
-        render();
-      });
-    });
-  }
+ 
+  renderThisWeek(schedule, byNum, startDate, today, todayOffset);
+  renderConfig();
+  renderSessions(byNum, todayOffset);
 }
-
-document.getElementById('startDate').addEventListener('change', async (e)=>{
-  state.startDate = e.target.value;
-  await saveState();
+ 
+function renderThisWeek(schedule, byNum, startDate, today, todayOffset){
+  const el = document.getElementById('thisWeekCard');
+ 
+  if(todayOffset === null){
+    // course hasn't started
+    const days = daysBetween(today, startDate);
+    el.innerHTML = `
+      <div class="eyebrow">Encara no ha començat</div>
+      <div class="session-title">El curs de psicomotricitat comença el ${formatDateLong(startDate)}</div>
+      <div class="status-msg">Falten ${days} dia${days===1?'':'s'} perquè comenci la Sessió 1.</div>
+    `;
+    return;
+  }
+ 
+  const totalWeeks = schedule.length;
+  if(todayOffset >= totalWeeks){
+    el.innerHTML = `
+      <div class="eyebrow">Curs acabat</div>
+      <div class="session-title">Ja s'han fet totes les sessions! 🎉</div>
+      <div class="status-msg">Les 29 sessions de la programació d'aquest curs s'han completat.</div>
+    `;
+    return;
+  }
+ 
+  const entry = schedule[todayOffset];
+  if(entry.skipped){
+    // find next scheduled session
+    const next = schedule.find(e => e.weekOffset > todayOffset && !e.skipped);
+    const reasonTxt = entry.reason ? ` (${entry.reason})` : "";
+    if(next){
+      const s = sessions.find(x => x.n === next.sessionNum);
+      const days = daysBetween(today, next.date);
+      const weeks = Math.ceil(days/7);
+      el.innerHTML = `
+        <div class="eyebrow">Aquesta setmana no toca sessió${reasonTxt}</div>
+        <div class="session-title">Propera: Sessió ${s.n} · ${s.ti}</div>
+        <div class="meta-row">
+          <span class="badge ${s.t}">${tipolLabel[s.t]}</span>
+        </div>
+        <div class="status-msg">El ${formatDateLong(next.date)} — d'aquí a ${days} dia${days===1?'':'s'} (~${weeks} setman${weeks===1?'a':'es'}).</div>
+      `;
+    } else {
+      el.innerHTML = `
+        <div class="eyebrow">Setmana saltada${reasonTxt}</div>
+        <div class="session-title">No hi ha sessió aquesta setmana</div>
+      `;
+    }
+    return;
+  }
+ 
+  const s = sessions.find(x => x.n === entry.sessionNum);
+  el.innerHTML = `
+    <div class="eyebrow">Aquesta setmana · Sessió ${s.n} de 29</div>
+    <div class="session-title">${s.ti}</div>
+    <div class="meta-row">
+      <span class="badge ${s.t}">${tipolLabel[s.t]}</span>
+      <span class="status-msg">${formatDateLong(entry.date)}</span>
+    </div>
+  `;
+}
+ 
+function renderConfig(){
+  const startInput = document.getElementById('startDate');
+  if(document.activeElement !== startInput){
+    startInput.value = state.start;
+  }
+ 
+  const list = document.getElementById('skipList');
+  if(state.skips.length === 0){
+    list.innerHTML = `<p class="empty-note">Cap setmana saltada encara.</p>`;
+    return;
+  }
+  const sorted = [...state.skips].sort((a,b)=> a.date.localeCompare(b.date));
+  list.innerHTML = sorted.map(sk => `
+    <div class="skip-item">
+      <div class="txt">${formatDateShort(parseISO(sk.date))}${sk.reason ? `<small>${escapeHtml(sk.reason)}</small>` : ''}</div>
+      <button type="button" data-skipdate="${sk.date}" class="removeSkip">✕</button>
+    </div>
+  `).join('');
+ 
+  list.querySelectorAll('.removeSkip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const d = btn.getAttribute('data-skipdate');
+      state.skips = state.skips.filter(s => s.date !== d);
+      saveSkips(state.skips);
+      render();
+    });
+  });
+}
+ 
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+ 
+function renderSessions(byNum, todayOffset){
+  const container = document.getElementById('sessionsContainer');
+  const openIds = new Set(
+    [...container.querySelectorAll('.session-item.open')].map(el => el.getAttribute('data-num'))
+  );
+ 
+  const trimestres = [1,2,3];
+  let html = '';
+ 
+  trimestres.forEach(tr=>{
+    html += `<h2 class="trimestre-title">${trimestreLabel[tr]}</h2>`;
+    sessions.filter(s => s.tr === tr).forEach(s=>{
+      const entry = byNum[s.n];
+      let status = 'upcoming';
+      if(entry){
+        if(todayOffset !== null){
+          if(entry.weekOffset < todayOffset) status = 'passed';
+          else if(entry.weekOffset === todayOffset) status = 'current';
+        }
+      }
+      const dateTxt = entry ? formatDateShort(entry.date) : '—';
+      const isOpen = openIds.has(String(s.n));
+ 
+      html += `
+        <div class="session-item ${status} ${isOpen?'open':''}" data-num="${s.n}">
+          <div class="session-head" data-toggle="${s.n}">
+            <span class="session-num">#${s.n}</span>
+            <span class="badge ${s.t}">${tipolLabel[s.t]}</span>
+            <div class="titles">
+              <h3>${s.ti}</h3>
+              <div class="date">${dateTxt}</div>
+            </div>
+            <span class="chevron">›</span>
+          </div>
+          <div class="session-body">
+            ${renderSessionDetail(s)}
+          </div>
+        </div>
+      `;
+    });
+  });
+ 
+  container.innerHTML = html;
+ 
+  container.querySelectorAll('[data-toggle]').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const item = head.closest('.session-item');
+      item.classList.toggle('open');
+    });
+  });
+}
+ 
+function renderSessionDetail(s){
+  const objLine = s.obj && s.obj !== "—" ? `<div class="obj-line">Objectius treballats: ${s.obj}</div>` : '';
+ 
+  if(s.special){
+    return `
+      ${objLine}
+      <div class="special-note">
+        <b>Sessió simplificada</b>
+        <p style="margin:0 0 6px;">${s.d}</p>
+        <div class="submeta"><span><b>Materials:</b> ${s.m}</span></div>
+      </div>
+    `;
+  }
+ 
+  const blocksHtml = s.b.map((bl,i)=>{
+    let breathChip = '';
+    if(i === s.b.length-1 && s.resp){
+      const desc = bancRespiracio[s.resp];
+      breathChip = `
+        <div class="breath-chip">
+          <span class="name">🌬️ Exercici de respiració: ${s.resp}</span>
+          ${desc ? desc : `<em>No descrit al banc de recursos del document.</em>`}
+        </div>
+      `;
+    }
+    return `
+      <div class="block">
+        <h4>${i+1}. ${bl.n}</h4>
+        <p>${bl.d}</p>
+        <div class="submeta">
+          <span><b>Organització/espai:</b> ${bl.o}</span>
+          <span><b>Materials:</b> ${bl.m}</span>
+          <span><b>Durada:</b> ${bl.du}</span>
+        </div>
+        ${breathChip}
+      </div>
+    `;
+  }).join('');
+ 
+  return `${objLine}${blocksHtml}`;
+}
+ 
+/* =========================================================
+   EVENTS
+========================================================= */
+document.getElementById('startDate').addEventListener('change', (e)=>{
+  if(e.target.value){
+    state.start = e.target.value;
+    saveStart(state.start);
+    render();
+  }
+});
+ 
+document.getElementById('addSkipBtn').addEventListener('click', ()=>{
+  const dateInput = document.getElementById('skipDate');
+  const reasonInput = document.getElementById('skipReason');
+  if(!dateInput.value) return;
+  const exists = state.skips.some(s => s.date === dateInput.value);
+  if(!exists){
+    state.skips.push({date: dateInput.value, reason: reasonInput.value.trim()});
+    saveSkips(state.skips);
+  }
+  dateInput.value = '';
+  reasonInput.value = '';
   render();
 });
-
-document.getElementById('addSkip').addEventListener('click', async ()=>{
-  const n = parseInt(document.getElementById('skipSession').value);
-  const reason = document.getElementById('skipReason').value.trim();
-  state.skips.push({ beforeSession: n, reason });
-  document.getElementById('skipReason').value = '';
-  await saveState();
-  render();
-});
-
-(async function init(){
-  await loadState();
-  render();
-})();
+ 
+render();
 </script>
 </body>
 </html>
